@@ -1,6 +1,7 @@
 package ru.lanit;
 
-import ru.lanit.utils.FileUtils;
+import ru.lanit.utils.file.FileListUtils;
+import ru.lanit.utils.file.FileUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class CollectionsCompare {
     
     private static String[] stringArray;
 
+    private static FileUtils fileUtils = new FileListUtils();
+
     public static void show(String path) throws IOException {
         System.out.println("Начинаем сравнение LinkedList:");
         System.out.println("Создание и добавление в лист 700_000+ строк:");
@@ -33,14 +36,14 @@ public class CollectionsCompare {
 
         System.out.println("Наглядное применение LinkedList для списка\n" 
                 + "добавляем студентов из списка students_for_LinkedList.txt в начало листов");
-        addStudentsFromAnotherFile(FileUtils.getContentLines(PATH_FOR_LINKED_LIST, UTF_8));
+        addStudentsFromAnotherFile(fileUtils.getContentLinesFromFile(PATH_FOR_LINKED_LIST, UTF_8));
         
 
     }
     
     private static void createStringArray(String path) throws IOException {
-        stringArray = new String[FileUtils.getContentLines(path, UTF_8).size()];
-        FileUtils.getContentLines(path, UTF_8).toArray(stringArray);
+        stringArray = new String[fileUtils.getContentLinesFromFile(path, UTF_8).size()];
+        fileUtils.getContentLinesFromFile(path, UTF_8).toArray(stringArray);
     }
 
     private static void createAndAddingCompare(String path) throws IOException {
